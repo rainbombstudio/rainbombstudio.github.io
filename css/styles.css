@@ -1,0 +1,469 @@
+/*
+GrayToad - Global Stylesheet
+Palette: Studio Celadon (#008489), Charcoal (#333), Light Mint (#f4f7f6)
+
+Author: Glen Nyundu
+Date: 19 April 2026
+File Name: styles.css 
+*/
+
+/* CSS Reset */
+
+
+:root {
+    --primary-color: #008489;
+    --text-color: #333;
+    --bg-light: #f4f7f6;
+    --white: #ffffff;
+    --black: #000000;
+    --orange: #cf7317;
+    --font-main: "IBM Plex Mono", monospace, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Koh Santepheap', sans-serif;
+    /* --font-main: 'Koh Santepheap' 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-main);
+    /*color: var(--text-color);*/
+    color: var(--black);
+    line-height: 1.6;
+    background-color: var(--white);
+
+    /*My font addiotions*/
+    font-weight: 400;
+}
+
+/* --- NAVIGATION HEADER --- */
+header {
+    background: var(--white);
+    /*padding: 1.5rem 5%;*/
+    padding: 1.5rem 5%;
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.block-navigation {
+    display: flex;
+    justify-content: space-between; /* Pushes Logo to Left, Menu to Right */
+    align-items: center;
+    max-width: 100%; /* Pushes the space on left of right of menu items. increase or decrese*/
+    margin: 0 auto;
+}
+
+.site-logo {
+    /*font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    text-decoration: none;
+    letter-spacing: -0.5px;*/
+    font-weight: 400;
+    letter-spacing: 1.5px;
+}
+
+.block-navigation ul {
+    list-style: none;
+    display: flex;
+    gap: 32px; /* Space between links on the right */
+}
+
+.block-navigation ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 400;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+}
+
+.block-navigation ul li a:hover {
+    color: var(--primary-color);
+}
+
+/* --- HERO SECTION --- */
+.hero-section {
+    /*padding: 80px 5%;*/
+    /*padding: 10px 0.5%;
+    text-align: center;
+    background: var(--bg-light);*/
+
+    position: relative; /* Essential for absolute positioning of children */
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    overflow: hidden;
+    line-height: 0; /* Removes tiny gap at bottom of image */
+    /*padding: 10px 1%*/
+
+    /* Hide Blur edges for filters */
+    /*overflow: hidden; /* hides blurred edges */
+}
+
+/* Create a dark fade at the bottom so white text is readable */
+.hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%; /* Gradient covers bottom half */
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    z-index: 1;
+}
+
+.hero-image {
+    /*max-width: 100%;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);*/
+
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0; /* Edge to edge looks better for this style */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.hero-content {
+    /*max-width: 100%;
+    max-width: 900px;
+    margin: 0 auto;*/
+    position: absolute;
+    bottom: 40px;    /* Distance from bottom */
+    left: 5%;        /* Distance from left */
+    text-align: left; /* Align text to the left */
+    z-index: 2;      /* Sits above the gradient overlay */
+    /*max-width: 100%;*/
+    max-width: 800px;
+    padding: 0;
+    margin: 0;
+}
+
+.hero-content h1 {
+    color: #ffffff; /* Changed to white to pop over the image */
+    margin-bottom: 50px;
+
+    padding-bottom: 1%;
+    font-family: "Koh Santepheap", serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 3.5rem;
+}
+
+.hero-content p {
+    color: #ffffff; /* Changed to white to pop over the image */
+    /*margin: 0 auto 40px;*/
+    margin-bottom: 50px;
+    padding-bottom: 5%;
+    max-width: 100%;
+
+    white-space: normal;
+    line-height: 1.6;
+
+    font-size: 1.1rem;
+}
+
+
+/*h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--primary-color);
+    color:#ffffff;
+    margin-bottom: 20px;
+    line-height: 1.1;
+}*/
+
+
+/* --- FILTERS --- */
+/* BLUR FILTER*/
+.blur {
+    /* Bur filter */
+    filter: blur(2px);
+    -webkit-filter: blur(2px); /* Safari support */
+    transform: scale(1.1); /* hides edge fade */
+}
+
+/* GRAPHITE FILTER */
+.graphite-container {
+  position: relative;
+  display: inline-block;
+}
+
+.graphite-container img {
+  width: 100%;
+  display: block;
+  filter: grayscale(100%) contrast(1.15) brightness(0.95);
+}
+
+/* subtle soft overlay */
+.graphite-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(200, 200, 200, 0.1);
+  mix-blend-mode: soft-light;
+}
+
+/* SEPIA FILTER*/
+.sepia {
+  filter: sepia(100%) contrast(1.1) brightness(0.95) saturate(1.2);
+}
+
+
+/* --- CONTENT SECTIONS --- */
+.content-wrapper, .reviews {
+    padding: 60px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.product-card {
+    padding: 30px;
+    background: var(--bg-light);
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+/* --- BEST SELLERS --- */
+.best-sellers {
+    text-align: left; /* Text Alighnment */
+    margin: 40px;
+    padding-left: 2%; /* Distance from the left border */
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.best-sellers h2 {
+    font-family: "Koh Santepheap", serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 1.8rem;
+}
+
+/* --- TESTIMONIALS --- */
+.reviews {
+    background-color: #cf7317;
+    max-width: 100%;
+    padding-top: 8%;
+    padding-bottom: 8%;
+}
+
+.reviews h1 {
+    margin-bottom: 40px;
+    color: var(--black);
+    padding-top: 8%;
+
+    font-family: "Koh Santepheap", serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 3.5rem;
+}
+
+.reviews h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--black);
+
+    font-family: "Koh Santepheap", serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 1.8rem;
+}
+
+.reviews div {
+    font-size: 2rem; 
+}
+
+blockquote {
+    font-size: 1.5rem;
+    font-style: italic;
+    border-left: 6px solid var(--black);
+    padding: 10px 0 10px 30px;
+    margin: 20px 0;
+    max-width: 800px;
+}
+
+cite {
+    display: block;
+    margin-top: 15px;
+    font-weight: 600;
+    color: var(--black);
+    font-style: normal;
+}
+
+
+/* --- ABOUT SECTION --- */
+.about {
+    text-align: left; /* Text Alighnment */
+    margin: 40px;
+    padding-left: 2%; /* Distance from the left border */
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.about h1 {
+    font-family: "Koh Santepheap", serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 3.5rem;
+}
+
+
+/* --- FOOTER --- */
+footer {
+    text-align: center;
+    padding: 40px 5%;
+    border-top: 1px solid #eee;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 768px) {
+    .block-navigation {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .block-navigation ul {
+        gap: 15px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+}
+
+/* --- FONTS --- */
+.koh-santepheap-thin {
+  font-family: "Koh Santepheap", serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.koh-santepheap-light {
+  font-family: "Koh Santepheap", serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.koh-santepheap-regular {
+  font-family: "Koh Santepheap", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.koh-santepheap-bold {
+  font-family: "Koh Santepheap", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.koh-santepheap-black {
+  font-family: "Koh Santepheap", serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* IBM Plex Mono */
+.ibm-plex-mono-thin {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.ibm-plex-mono-extralight {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.ibm-plex-mono-light {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.ibm-plex-mono-regular {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.ibm-plex-mono-medium {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.ibm-plex-mono-semibold {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.ibm-plex-mono-bold {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.ibm-plex-mono-thin-italic {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.ibm-plex-mono-extralight-italic {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.ibm-plex-mono-light-italic {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.ibm-plex-mono-regular-italic {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.ibm-plex-mono-medium-italic {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.ibm-plex-mono-semibold-italic {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.ibm-plex-mono-bold-italic {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 700;
+  font-style: italic;
+}
+
